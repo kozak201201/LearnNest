@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { KozakJwtService } from './kozak-jwt.service';
 import { KozakJwtModel } from './kozak-jwt.model';
 import { SequelizeModule } from '@nestjs/sequelize';
