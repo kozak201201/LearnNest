@@ -8,8 +8,15 @@ import {
 import { User } from '../users/users.model';
 import { CreatePostDto } from './dto/create-post.dto';
 
+interface PostCreationAttrs {
+  title: string;
+  description: string;
+  image: string;
+  userId: string;
+}
+
 @Table({ tableName: 'posts', updatedAt: false, createdAt: false })
-export class Post extends Model<Post, CreatePostDto> {
+export class Post extends Model<Post, PostCreationAttrs> {
   @Column({
     defaultValue: DataType.UUIDV4,
     type: DataType.UUID,
@@ -22,6 +29,9 @@ export class Post extends Model<Post, CreatePostDto> {
 
   @Column({ type: DataType.STRING, allowNull: false })
   description: string;
+
+  @Column({ type: DataType.STRING, allowNull: false })
+  image: string;
 
   @ForeignKey(() => User)
   @Column({ type: DataType.UUID })

@@ -6,12 +6,17 @@ import { PostsModule } from './posts/posts.module';
 import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
 import { KozakJwtModule } from './kozak-jwt/kozak-jwt.module';
+import { FileService } from './file/file.service';
+import { FileModule } from './file/file.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
+    ServeStaticModule.forRoot({ rootPath: path.resolve(__dirname, 'static') }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRES_HOST,
@@ -26,8 +31,9 @@ import { KozakJwtModule } from './kozak-jwt/kozak-jwt.module';
     RolesModule,
     AuthModule,
     KozakJwtModule,
+    FileModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [FileService],
 })
 export class AppModule {}
